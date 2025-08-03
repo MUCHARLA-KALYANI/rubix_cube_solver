@@ -38,7 +38,7 @@ function Solver(props) {
 		let scrambleError = document.querySelector(".scramble__error");
 		let retryBtn = document.querySelector(".retry__btn--scramble");
 		let repeatBtn = document.querySelector(".repeat__btn");
-		let prevBtn = document.querySelector(".previous__btn");
+		// let prevBtn = document.querySelector(".previous__btn");
 		let nextBtn = document.querySelector(".next__move--btn");
 		let replayBtn = document.querySelector(".replay__btn");
 		// Create color array by matching its index with "orientation" value
@@ -572,7 +572,7 @@ function Solver(props) {
 			movesNum.classList.remove("active");
 			stepCountBtn.classList.remove("active");
 			// Initially, "Previous", "Repeat" and "Next" are disabled
-			prevBtn.setAttribute("disabled", "");
+			// prevBtn.setAttribute("disabled", "");
 			repeatBtn.setAttribute("disabled", "");
 			nextBtn.setAttribute("disabled", "");
 			let async = false; // Scramble should not be smooth
@@ -634,11 +634,11 @@ function Solver(props) {
 					}
 					forwardIndex++;
 					// Allow user to goto previous step if atleast 2 moves are done
-					if (forwardIndex >= 2) {
-						prevBtn.removeAttribute("disabled");
-					} else {
-						prevBtn.setAttribute("disabled", "");
-					}
+					// if (forwardIndex >= 2) {
+					// 	prevBtn.removeAttribute("disabled");
+					// } else {
+					// 	prevBtn.setAttribute("disabled", "");
+					// }
 					i--; // Freeing bought Time for next Move
 				} 
 				else {
@@ -659,37 +659,38 @@ function Solver(props) {
 			nextMove(repeat);
 		}
 		// Takes user to previous step
-		function previousMove() {
-			let async = false,
-				repeat = false;
-			// Next Button needs to be enabled
-			nextBtn.removeAttribute("disabled");
-			replayBtn.classList.remove("active");
-			cubePivot.classList.remove("active");
-			// Reverse 2 step moves
-			let reverseStepIndex =
-			props.movesAlgo.reverseAlgo.length - forwardIndex;
-			console.log(forwardIndex, reverseStepIndex);
-			applyMove(props.movesAlgo.reverseAlgo[reverseStepIndex], async);
-			reverseStepIndex++;
-			applyMove(props.movesAlgo.reverseAlgo[reverseStepIndex], async);
-			forwardIndex -= 2;
-			// Take the solved state to unsolved
-			setCubeSolved(false);
-			setMoveMessage(`Orient your cube as shown here to solve.`);
-			setStepCount((prevCount) => prevCount - 2); // Decrement step count
-			// Re-animate one move smoothly
-			nextMove(repeat);
-		}
+		// function previousMove() {
+		// 	let async = false,
+		// 		repeat = false;
+		// 	// Next Button needs to be enabled
+		// 	nextBtn.removeAttribute("disabled");
+		// 	replayBtn.classList.remove("active");
+		// 	cubePivot.classList.remove("active");
+		// 	// Reverse 2 step moves
+		// 	let reverseStepIndex =
+		// 	props.movesAlgo.reverseAlgo.length - forwardIndex;
+		// 	console.log(forwardIndex, reverseStepIndex);
+		// 	applyMove(props.movesAlgo.reverseAlgo[reverseStepIndex], async);
+		// 	reverseStepIndex++;
+		// 	applyMove(props.movesAlgo.reverseAlgo[reverseStepIndex], async);
+		// 	forwardIndex -= 2;
+		// 	// Take the solved state to unsolved
+		// 	setCubeSolved(false);
+		// 	setMoveMessage(`Orient your cube as shown here to solve.`);
+		// 	setStepCount((prevCount) => prevCount - 2); // Decrement step count
+		// 	// Re-animate one move smoothly
+		// 	nextMove(repeat);
+		// }
 		function handleKeys(e)
 		{
 			let inputKey = e.key;
 			console.log(inputKey);
-			if(inputKey == "ArrowLeft" && !prevBtn.hasAttribute("disabled"))
-			{
-				previousMove();
-			}
-			else if(inputKey == "ArrowDown" && !repeatBtn.hasAttribute("disabled"))
+			// if(inputKey == "ArrowLeft" && !prevBtn.hasAttribute("disabled"))
+			// {
+			// 	previousMove();
+			// }
+			// else
+				 if(inputKey == "ArrowDown" && !repeatBtn.hasAttribute("disabled"))
 			{
 				repeatMove();
 			}
@@ -699,7 +700,7 @@ function Solver(props) {
 			}
 		}
 		retryBtn.addEventListener("click", reScramble);
-		prevBtn.addEventListener("click", previousMove);
+		// prevBtn.addEventListener("click", previousMove);
 		nextBtn.addEventListener("click", (e) => nextMove(false));
 		repeatBtn.addEventListener("click", repeatMove);
 		replayBtn.addEventListener("click", (e) => props.handleReplay());
@@ -715,13 +716,13 @@ function Solver(props) {
 			replayBtn.classList.remove("active");
 			cubePivot.classList.remove("active");
 
-			prevBtn.setAttribute("disabled", "");
+			// prevBtn.setAttribute("disabled", "");
 			repeatBtn.setAttribute("disabled", "");
 			nextBtn.setAttribute("disabled", "");
 			// setStepCount(0);
 			// setCubeSolved(false);
 			retryBtn.removeEventListener("click", reScramble);
-			prevBtn.removeEventListener("click", previousMove);
+			// prevBtn.removeEventListener("click", previousMove);
 			nextBtn.removeEventListener("click", (e) => nextMove(false));
 			repeatBtn.removeEventListener("click", repeatMove);
 			replayBtn.removeEventListener("click", (e) => props.handleReplay());
@@ -994,9 +995,9 @@ function Solver(props) {
 					}}
 				></div>
 			</div>
-			<button className="previous__btn" disabled>
+			{/* <button className="previous__btn" disabled>
 				Previous
-			</button>
+			</button> */}
 			<button className="repeat__btn" disabled>
 				Repeat
 			</button>
